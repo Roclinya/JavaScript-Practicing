@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>05createOptionObject.html</title>
+    <script>
+        window.onload=function(){
+            // var flag = true; //flag0 = true;
+            var area = document.getElementsByTagName("select");
+            var len = area.length;
+            for(i=0;i<len;i++){
+                area[i].addEventListener("change",ch);
+            }
+
+            // document.getElementById("idSelectYear").addEventListener("change",ch);
+            // document.getElementById("idSelectMonth").addEventListener("click",reset);
+            // document.getElementById("idSelectYear").addEventListener("click",reset0);
+            
+            function ch(){
+                var val = document.getElementById(this.id).value;
+                document.getElementById("sp"+this.id.substr(8)).innerHTML=val;
+                if(this.id.substr(8)!="Day"){
+                    document.getElementById("spDay").innerHTML=1;
+
+                    reset();
+                }
+                
+            }
+
+            function reset(){
+                document.getElementById("idSelectDay").innerHTML="";
+                // if(flag){
+                //     document.getElementById("idSelectDay").innerHTML="";
+                //     flag = false;
+                // }else{
+                //     flag = true;
+
+                    var theyear = area[0].value;
+            var themonth = area[1].value;
+            var d = new Date(theyear,themonth,0);
+            var theday = d.getDate();
+
+            for(i=1;i<=theday;i++){
+                var opt = document.createElement("option");
+                opt.value = i;
+                opt.innerHTML = i;
+                // area[2].appendChild(opt);
+                document.getElementById('idSelectDay').appendChild(opt);
+            // };
+                };
+            };
+
+            // function reset0(){
+            //     reset();
+            //     if(flag0){
+            //         document.getElementById("idSelectDay").innerHTML="";
+            //     }
+            // }
+
+
+            for (i = 2010; i <= 2020; i++) {   //新增年
+                var opt = document.createElement("option");
+                opt.setAttribute("value", i);
+                var optTxt = document.createTextNode(i);
+                opt.appendChild(optTxt);
+                //opt.value = i;
+                //opt.innerHTML = i;
+                document.getElementById('idSelectYear').appendChild(opt);
+            }
+            
+            
+            
+            for (i = 1; i <= 12; i++) {   //新增月 
+                var opt = document.createElement("option");
+                // opt.setAttribute("value", i);
+                // var optTxt = document.createTextNode(i);
+                // opt.appendChild(optTxt);
+                opt.value = i;
+                opt.innerHTML = i;
+                document.getElementById('idSelectMonth').appendChild(opt);
+            }
+            
+            var theyear = area[0].value;
+            var themonth = area[1].value;
+            var d = new Date(theyear,themonth,0);
+            var theday = d.getDate();
+
+            for(i=1;i<=theday;i++){                 //新增日
+                var opt = document.createElement("option");
+                opt.value = i;
+                opt.innerHTML = i;
+                // area[2].appendChild(opt);
+                document.getElementById('idSelectDay').appendChild(opt);
+            }
+        };
+	</script>
+	</head>
+	<body>
+        <select id="idSelectYear"></select>年
+        <select id="idSelectMonth"></select>月
+        <select id="idSelectDay"></select>日
+        <h2>你選擇的日期是<span id="spYear">2010</span>年<span id="spMonth">01</span>月<span id="spDay">01</span>日</h2>
+	</body>
+
+</html>
